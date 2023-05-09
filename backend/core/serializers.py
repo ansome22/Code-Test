@@ -1,6 +1,6 @@
 from . import models
 from rest_framework import serializers
-from rest_framework.fields import CharField, IntegerField
+from rest_framework.fields import CharField, IntegerField,UUIDField
 
 
 
@@ -35,4 +35,16 @@ class ChargePointConnectorSerializer(serializers.ModelSerializer):
 		model = models.ChargePointConnector
 		fields = (
 			'connectorNumber',
+		)
+
+
+class RFIDSerializer(serializers.ModelSerializer):
+
+	name = CharField(required=True)
+	number = UUIDField(required=True)
+	
+	class Meta:
+		model = models.ChargePointConnector
+		fields = (
+			'number',
 		)

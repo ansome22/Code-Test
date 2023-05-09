@@ -43,3 +43,17 @@ class ChargePointConnector(
 
 	def __str__(self):
 		return f'{self.connectorNumber}'
+	
+
+class RFID(
+	Model
+	):
+
+	class Meta:
+		verbose_name_plural = "RFIDs"
+
+	name = models.CharField(verbose_name="Name", max_length=255)
+	number = models.UUIDField(default=uuid.uuid4)
+
+	def __str__(self):
+		return f'{self.connectorNumber}'

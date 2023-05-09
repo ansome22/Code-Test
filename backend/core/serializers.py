@@ -1,6 +1,6 @@
 from . import models
 from rest_framework import serializers
-from rest_framework.fields import CharField, IntegerField,UUIDField
+from rest_framework.fields import CharField, IntegerField,UUIDField, DateTimeField
 
 
 
@@ -44,7 +44,38 @@ class RFIDSerializer(serializers.ModelSerializer):
 	number = UUIDField(required=True)
 	
 	class Meta:
-		model = models.ChargePointConnector
+		model = models.RFID
 		fields = (
 			'number',
+		)
+
+
+class VehicleSerializer(serializers.ModelSerializer):
+
+	name = CharField(required=True)
+	registrationPlate = CharField(required=True)
+	
+	class Meta:
+		model = models.Vehicle
+		fields = (
+			'name',
+			'registrationPlate',
+		)
+
+
+
+class ChargeSessionSerializer(serializers.ModelSerializer):
+
+	vehicle = UUIDField(required=True)
+	startDate = DateTimeField(required=True)
+	endDate = DateTimeField(required=True)
+	errorMessage = CharField(required=True)
+	
+	class Meta:
+		model = models.ChargeSession
+		fields = (
+			'vehicle',
+			'startDate',
+			'endDate',
+			'errorMessage',
 		)

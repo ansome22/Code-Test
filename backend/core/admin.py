@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RFID, ChargePoint, ChargePointConnector, Customer
+from .models import RFID, ChargePoint, ChargePointConnector, ChargeSession, Customer, Vehicle
 
 
 @admin.register(Customer)
@@ -17,3 +17,11 @@ class ChargePointAdmin(admin.ModelAdmin):
 @admin.register(RFID)
 class ChargePointAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'number')
+
+@admin.register(Vehicle)
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ('name','registrationPlate')
+
+@admin.register(ChargeSession)
+class ChargePointAdmin(admin.ModelAdmin):
+    list_display = ('vehicle','startDate','endDate')

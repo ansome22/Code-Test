@@ -56,4 +56,34 @@ class RFID(
 	number = models.UUIDField(default=uuid.uuid4)
 
 	def __str__(self):
-		return f'{self.connectorNumber}'
+		return f'{self.name}'
+	
+
+class Vehicle(
+	Model
+	):
+
+	class Meta:
+		verbose_name_plural = "Vehicles"
+
+	name = models.CharField(verbose_name="Name", max_length=255)
+	registrationPlate = models.CharField(verbose_name="RegistrationPlate", max_length=255)
+
+	def __str__(self):
+		return f'{self.name}'
+	
+
+class ChargeSession(
+	Model
+	):
+
+	class Meta:
+		verbose_name_plural = "ChargeSessions"
+
+	vehicle = models.UUIDField(verbose_name="Vehicle")
+	startDate = models.DateTimeField(verbose_name="startDate")
+	endDate = models.DateTimeField(verbose_name="endDate")
+	errorMessage = models.TextField(verbose_name="errorMessage")
+
+	def __str__(self):
+		return f'{self.name}'

@@ -1,0 +1,23 @@
+<div class="grid grid-cols-1 p-4" *ngIf="cart">
+  <div>
+    <p><b>First Name:</b> {{ cart.first_name }}</p>
+    <p><b>Last Name:</b> {{ cart.last_name }}</p>
+    <p><b>Email:</b> {{ cart.email }}</p>
+  </div>
+  <div class="pt-5">
+    <h1>Products</h1>
+    <div *ngIf="cart.products && cart.products.length == 0">
+      No Products currently in cart
+    </div>
+
+    <div *ngIf="cart.products && cart.products.length > 0">
+      <div *ngFor="let product of cart.products">
+        <p>{{ product.name }}</p>
+        <p>{{ product.description }}</p>
+        <p>$ {{ product.price }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!cart"><p>Cart could not be found</p></div>
+</div>

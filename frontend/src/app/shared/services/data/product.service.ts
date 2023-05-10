@@ -35,7 +35,7 @@ export class ProductService {
         return false;
       }
     });
-    debugger;
+
     //make sure it exists in our memory
     if (productDatabase) {
       productDatabase.sku = productRequest.sku;

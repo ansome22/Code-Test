@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { CartProductsMock, CartsMock } from './mock/cart.mock';
 import { of } from 'rxjs';
 import { ProductService } from './product.service';
-import { CartProductsFront } from '../../models/cart';
+import { CartProducts, CartProductsFront } from '../../models/cart';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,10 @@ import { CartProductsFront } from '../../models/cart';
 export class CartService {
   carts = CartsMock;
   cartProducts = CartProductsMock;
-  constructor(private productsService: ProductService) {}
+  constructor(
+    private productsService: ProductService,
+    private userService: UserService
+  ) {}
 
   getAllCarts() {
     return of(
@@ -75,6 +79,62 @@ export class CartService {
     } else {
       //if null it could not be found
       return of();
+    }
+  }
+
+  addProductToCart(usersub: any, productID: number) {
+    //findUser
+    // should be Code Flow but there is no backend
+
+    const user = this.userService.users.find((user) => {
+      if (user.sub == usersub) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    //check user did exist
+    if (user) {
+      const cart = this.carts.find((cart) => {
+        if (cart.user_id == user.user_id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (cart) {
+        //check product already exists
+        const idIfExists = this.cartProducts.findIndex((cartProduct) => {
+          if (
+            cartProduct.user_id == user.user_id &&
+            cartProduct.productID == productID
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        if (idIfExists != -1) {
+          //add amount if exists
+          this.cartProducts[idIfExists].amount++;
+          return of(true);
+        } else {
+          //else add new product to cart
+          const cartProduct: CartProducts = {
+            user_id: user.user_id,
+            productID: productID,
+            amount: 1,
+          };
+          this.cartProducts.push(cartProduct);
+          return of(true);
+        }
+      } else {
+        throw 'Cart not found';
+      }
+    } else {
+      throw 'User Not Found';
     }
   }
 }

@@ -8,7 +8,8 @@
       <p><b>Price:</b> $ {{ product.price }}</p>
     </div>
     <div class="p-5">
-      <button (click)="addToCart()">Add to Cart</button>
+      <button (click)="addToCart(product.id)">Add to Cart</button>
+      <button disabled="true">Added to cart</button>
     </div>
   </div>
 </div>

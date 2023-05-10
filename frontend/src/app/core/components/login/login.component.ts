@@ -38,7 +38,6 @@ export class LoginComponent {
           next: (user) => {
             if (user) {
               this.localStorage.setItem('user', user);
-              debugger
               this.router.navigate(['in', 'dashboard']);
             } else {
               this.incorrectLogin = true;

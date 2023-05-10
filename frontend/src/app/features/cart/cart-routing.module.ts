@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'show',
     canActivate: [isCustomerGuard],
-    component: ShowCartComponent,
+    component: CheckoutComponent,
   },
   {
     path: 'show/:id',

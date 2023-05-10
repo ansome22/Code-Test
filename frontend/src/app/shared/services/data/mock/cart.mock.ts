@@ -1,4 +1,4 @@
-import { Cart } from 'src/app/shared/models/cart';
+import { Cart, CartProducts } from 'src/app/shared/models/cart';
 
 export const CartsMock: Cart[] = [
   {
@@ -6,13 +6,24 @@ export const CartsMock: Cart[] = [
     user_id: 1,
     last_name: 'Door',
     email: 'aaa',
-    products: [],
   },
   {
     first_name: 'Hanna',
     user_id: 3,
     last_name: 'Door',
     email: 'aaa',
-    products: [],
+  },
+];
+
+export const CartProductsMock: CartProducts[] = [
+  {
+    user_id: 1,
+    productID: 1,
+    amount: 1,
+  },
+  {
+    user_id: 1,
+    productID: 2,
+    amount: 1,
   },
 ];

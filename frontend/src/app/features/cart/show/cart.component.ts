@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cart } from 'src/app/shared/models/cart';
+import { Cart, CartProductsFront } from 'src/app/shared/models/cart';
 import { CartService } from 'src/app/shared/services/data/cart.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { CartService } from 'src/app/shared/services/data/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class ShowCartComponent {
-  cart?: Cart;
+  cart?: CartProductsFront;
   constructor(
     private cartService: CartService,
     private router: Router,
@@ -21,9 +21,14 @@ export class ShowCartComponent {
     }
   }
 
-  getCart(id:string) {
-    this.cartService.getCartByUser(id).subscribe((cart) => {
-      this.cart = cart;
+  getCart(id: string) {
+    this.cartService.getCartByUser(id).subscribe({
+      next: (cart) => {
+        this.cart = cart;
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
     });
   }
 }

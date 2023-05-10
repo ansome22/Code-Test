@@ -7,7 +7,7 @@ import { Product } from '../../models/product';
   providedIn: 'root',
 })
 export class ProductService {
-  private products = ProducksMock;
+  products = ProducksMock;
 
   constructor() {}
 

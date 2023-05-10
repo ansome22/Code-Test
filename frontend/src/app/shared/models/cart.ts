@@ -1,9 +1,18 @@
-import { Cart_Product } from './product';
+import { Product } from './product';
 
 export interface Cart {
   user_id: number;
   first_name: string;
   last_name: string;
   email: string;
-  products: number[];
+}
+
+export interface CartProducts {
+  user_id: number;
+  productID: number;
+  amount: number;
+}
+
+export interface CartProductsFront extends Cart {
+  products?: Product[];
 }

@@ -6,9 +6,17 @@
   </div>
   <div class="pt-5">
     <h1>Products</h1>
-    <div *ngIf="cart.products.length == 0">No Products currently in cart</div>
+    <div *ngIf="cart.products && cart.products.length == 0">
+      No Products currently in cart
+    </div>
 
-    <div *ngIf="cart.products.length > 0">Showing products</div>
+    <div *ngIf="cart.products && cart.products.length > 0">
+      <div *ngFor="let product of cart.products">
+        <p>{{ product.name }}</p>
+        <p>{{ product.description }}</p>
+        <p>$ {{ product.price }}</p>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="!cart"><p>Cart could not be found</p></div>

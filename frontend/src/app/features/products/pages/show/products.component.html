@@ -1,4 +1,10 @@
 <div *ngIf="product">
+  <button
+    (click)="editProduct(product.sku)"
+    class="bg-slate-700 pl-10 pr-10 mt-5"
+  >
+    Edit Product
+  </button>
   <p>{{ product.name }}</p>
   <p>{{ product.description }}</p>
   <p>$ {{ product.price }}</p>

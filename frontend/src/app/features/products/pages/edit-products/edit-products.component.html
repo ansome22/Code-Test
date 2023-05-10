@@ -1,1 +1,86 @@
-<p>edit-products works!</p>
+<h1>Edit Product</h1>
+
+<form (submit)="submitForm()" class="p-10" [formGroup]="formGroup">
+  <div>
+    <label for="sku" class="block text-sm font-medium leading-6 text-gray-900"
+      >SKU</label
+    >
+    <div class="relative mt-2 rounded-md shadow-sm">
+      <input
+        type="text"
+        formControlName="sku"
+        id="sku"
+        class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label for="name" class="block text-sm font-medium leading-6 text-gray-900"
+      >Name</label
+    >
+    <div class="relative mt-2 rounded-md shadow-sm">
+      <input
+        type="text"
+        formControlName="name"
+        id="name"
+        class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label
+      for="username"
+      class="block text-sm font-medium leading-6 text-gray-900"
+      >Description</label
+    >
+    <div class="relative mt-2 rounded-md shadow-sm">
+      <input
+        type="text"
+        formControlName="description"
+        id="description"
+        class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label for="price" class="block text-sm font-medium leading-6 text-gray-900"
+      >Price</label
+    >
+    <div class="relative mt-2 rounded-md shadow-sm">
+      <div
+        class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+      >
+        <span class="text-gray-500 sm:text-sm">$</span>
+      </div>
+      <input
+        type="text"
+        formControlName="price"
+        id="price"
+        class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      />
+    </div>
+  </div>
+
+  <div class="text-red-500 p-2">
+    <div *ngIf="submitError">
+      <p>Make sure all fields are filled in</p>
+    </div>
+    <div *ngIf="internalError">
+      <p>Internal error: Try again later</p>
+      <p>If the issue continues contact your admin</p>
+    </div>
+    <div *ngIf="editProductError">
+      <p>Failed to Edit Product</p>
+    </div>
+  </div>
+
+  <div class="grid gap-4 grid-cols-2">
+    <button (click)="goBack()" class="bg-slate-700 pl-10 pr-10 mt-5">
+      Go Back
+    </button>
+    <button type="submit" class="bg-slate-700 pl-10 pr-10 mt-5">Submit</button>
+  </div>
+</form>

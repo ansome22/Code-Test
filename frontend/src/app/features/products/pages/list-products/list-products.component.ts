@@ -22,4 +22,8 @@ export class ListProductsComponent {
   showProduct(sku: string) {
     this.router.navigate(['in', 'products', 'show', sku]);
   }
+
+  editProduct(sku: string) {
+    this.router.navigate(['in', 'products', 'edit', sku]);
+  }
 }

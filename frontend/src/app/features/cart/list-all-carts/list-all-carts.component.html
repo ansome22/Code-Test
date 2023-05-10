@@ -1,1 +1,20 @@
-<p>list-all-carts works!</p>
+<div *ngFor="let cart of carts">
+  <div class="grid grid-cols-2 p-4">
+    <div>
+      <div
+        class="grid gap-4 grid-cols-2 cursor-pointer border-solid border-2 border-sky-500"
+        (click)="showCart(cart.user_id)"
+      >
+        <div>
+          <p><b>First Name:</b> {{ cart.first_name }}</p>
+          <p class="line-clamp-1"><b>Last Name:</b> {{ cart.last_name }}</p>
+        </div>
+        <div>
+          <p class="text-center">
+            <b>Number of items:</b> {{ amountofProducts(cart.products) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

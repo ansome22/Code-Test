@@ -8,13 +8,18 @@ import { ShowCartComponent } from './show/cart.component';
 
 const routes: Routes = [
   {
-    path: 'all-carts',
+    path: 'all',
     canActivate: [isAdminGuard],
     component: ListAllCartsComponent,
   },
   {
     path: 'show',
     canActivate: [isCustomerGuard],
+    component: ShowCartComponent,
+  },
+  {
+    path: 'show/:id',
+    canActivate: [isAdminGuard],
     component: ShowCartComponent,
   },
   {

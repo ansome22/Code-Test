@@ -13,7 +13,6 @@ export class EditProductsComponent {
   submitError = false;
   internalError = false;
   product?: Product;
-  orginalSKU?: string;
   formGroup: FormGroup = new FormGroup({
     sku: new FormControl(null, [Validators.required]),
     name: new FormControl(null, [Validators.required]),
@@ -28,7 +27,6 @@ export class EditProductsComponent {
   ) {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.orginalSKU = id;
       this.getProduct(id);
       if (this.product) {
         this.formGroup.patchValue({
@@ -52,25 +50,22 @@ export class EditProductsComponent {
     // to visually tell the user we are sending request again
     this.internalError = this.submitError = this.editProductError = false;
     if (this.formGroup.valid) {
-      //check with our dummy api user exists
-
-      if (this.orginalSKU) {
-        this.productService
-          .editProduct(this.orginalSKU, this.FormToProductModel())
-          .subscribe({
-            next: (didSuccced) => {
-              if (didSuccced) {
-                this.router.navigate(['in', 'products', 'list']);
-              } else {
-                this.editProductError = true;
-                console.log('Failed to edit Product');
-              }
-            },
-            error: (error) => {
-              console.log(error);
-              this.internalError = true;
-            },
-          });
+      const product = this.FormToProductModel();
+      if (product) {
+        this.productService.editProduct(product).subscribe({
+          next: (didSuccced) => {
+            if (didSuccced) {
+              this.router.navigate(['in', 'products', 'list']);
+            } else {
+              this.editProductError = true;
+              console.log('Failed to edit Product');
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            this.internalError = true;
+          },
+        });
       }
     } else {
       this.submitError = true;
@@ -81,13 +76,18 @@ export class EditProductsComponent {
     this.router.navigate(['in', 'products', 'list']);
   }
 
-  private FormToProductModel(): Product {
-    const product: Product = {
-      sku: this.formGroup.controls['sku'].value,
-      name: this.formGroup.controls['name'].value,
-      description: this.formGroup.controls['description'].value,
-      price: this.formGroup.controls['price'].value,
-    };
-    return product;
+  private FormToProductModel(): Product | null {
+    if (this.product) {
+      const product: Product = {
+        id: this.product.id,
+        sku: this.formGroup.controls['sku'].value,
+        name: this.formGroup.controls['name'].value,
+        description: this.formGroup.controls['description'].value,
+        price: this.formGroup.controls['price'].value,
+      };
+      return product;
+    } else {
+      return null;
+    }
   }
 }

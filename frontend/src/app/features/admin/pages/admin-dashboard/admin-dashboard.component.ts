@@ -13,6 +13,6 @@ export class AdminDashboardComponent {
   }
 
   customerCarts() {
-    this.router.navigate(['in', 'cart', 'all-carts']);
+    this.router.navigate(['in', 'cart', 'all']);
   }
 }

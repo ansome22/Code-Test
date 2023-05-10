@@ -27,9 +27,9 @@ export class ProductService {
     return of(product);
   }
 
-  editProduct(sku: string, product: Product) {
+  editProduct(productRequest: Product) {
     const productDatabase = this.products.find((product) => {
-      if (product.sku == sku) {
+      if (product.id == productRequest.id) {
         return true;
       } else {
         return false;
@@ -38,12 +38,14 @@ export class ProductService {
     debugger;
     //make sure it exists in our memory
     if (productDatabase) {
-      productDatabase.sku = product.sku;
-      productDatabase.name = product.name;
-      productDatabase.description = product.description;
-      productDatabase.price = product.price;
+      productDatabase.sku = productRequest.sku;
+      productDatabase.name = productRequest.name;
+      productDatabase.description = productRequest.description;
+      productDatabase.price = productRequest.price;
 
-      const foundIndex = this.products.findIndex((x) => x.sku == sku);
+      const foundIndex = this.products.findIndex(
+        (x) => x.id == productRequest.id
+      );
 
       if (foundIndex != -1) {
         this.products[foundIndex] = productDatabase;

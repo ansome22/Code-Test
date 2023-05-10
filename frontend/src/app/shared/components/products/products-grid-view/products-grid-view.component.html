@@ -1,1 +1,14 @@
-<p>products-grid-view works!</p>
+<h1>Products</h1>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+  <div *ngFor="let product of products" class="grid">
+    <div (click)="showProduct(product.sku)" class="cursor-pointer">
+      <p><b>Name:</b> {{ product.name }}</p>
+      <p class="line-clamp-1"><b>Description:</b> {{ product.description }}</p>
+      <p><b>Price:</b> $ {{ product.price }}</p>
+    </div>
+    <div class="p-5">
+      <button (click)="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+</div>

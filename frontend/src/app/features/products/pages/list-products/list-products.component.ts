@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/models/product';
+import { UserType } from 'src/app/shared/models/user';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { ProductService } from 'src/app/shared/services/data/product.service';
 
 @Component({
@@ -8,8 +10,23 @@ import { ProductService } from 'src/app/shared/services/data/product.service';
   styleUrls: ['./list-products.component.css'],
 })
 export class ListProductsComponent {
+  isAdmin: boolean = false;
+  isCustomer: boolean = false;
   products?: Product[];
-  constructor(private productService: ProductService, private router: Router) {
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService
+  ) {
+    this.isAdmin = this.isCustomer = false;
+    const userType = this.authService.getUserType();
+
+    if (userType == UserType.Admin) {
+      this.isAdmin = true;
+    }
+
+    if (userType == UserType.Customer) {
+      this.isCustomer = true;
+    }
     this.getProducts();
   }
 
@@ -17,13 +34,5 @@ export class ListProductsComponent {
     this.productService.getProducts().subscribe((products) => {
       this.products = products;
     });
-  }
-
-  showProduct(sku: string) {
-    this.router.navigate(['in', 'products', 'show', sku]);
-  }
-
-  editProduct(sku: string) {
-    this.router.navigate(['in', 'products', 'edit', sku]);
   }
 }

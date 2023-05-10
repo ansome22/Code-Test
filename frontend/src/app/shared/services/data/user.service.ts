@@ -6,7 +6,7 @@ import { of } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  users = UserMock;
+  private users = UserMock;
 
   constructor() {}
 

@@ -1,1 +1,21 @@
-<p>list-products works!</p>
+<div *ngFor="let product of products">
+  <div class="grid gap-4 grid-cols-2 p-10">
+    <div>
+      <div
+        class="grid gap-4 grid-cols-2 cursor-pointer border-solid border-2 border-sky-500"
+        (click)="showProduct(product.sku)"
+      >
+        <div>
+          <p>{{ product.name }}</p>
+          <p class="line-clamp-1">{{ product.description }}</p>
+        </div>
+        <div>
+          <p class="text-center">$ {{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid justify-center">
+      <button>Add to Cart</button>
+    </div>
+  </div>
+</div>

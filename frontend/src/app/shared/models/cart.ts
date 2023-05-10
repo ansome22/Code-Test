@@ -1,8 +1,9 @@
-import { Product } from "./product";
+import { Cart_Product } from './product';
 
 export interface Cart {
-    first_name: string, 
-    last_name: string, 
-    email: string
-    products: Partial<Product>[],
+  user_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  products?: Partial<Cart_Product>[];
 }

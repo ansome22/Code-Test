@@ -1,1 +1,35 @@
-<p>login works!</p>
+<form (submit)="submitForm()" class="p-10" [formGroup]="formGroup">
+<div>
+    <label for="username" class="block text-sm font-medium leading-6 text-gray-900">User Name</label>
+    <div class="relative mt-2 rounded-md shadow-sm">
+        <input type="text" formControlName="username" id="username"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+    </div>
+</div>
+
+<div>
+    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+    <div class="relative mt-2 rounded-md shadow-sm">
+        <input type="password" formControlName="password" id="password"
+            class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+    </div>
+</div>
+
+<div  class="text-red-500 p-2">
+    <div *ngIf="submitError">
+        <p>Make sure all fields are filled in</p>
+    </div>
+    <div *ngIf="internalError">
+        <p>Internal error: Try again later</p>
+        <p>If the issue continues contact your admin</p>
+    </div>
+    <div *ngIf="incorrectLogin">
+        <p>Username or Password is incorrect</p>
+    </div>
+</div>
+
+<div>
+    <button type="submit" class="bg-slate-700 pl-10 pr-10 mt-5">Login</button>
+</div>
+</form>
+

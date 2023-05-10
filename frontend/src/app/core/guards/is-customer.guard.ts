@@ -4,6 +4,7 @@ import { LocalStorageService } from 'src/app/shared/services/local-storage.servi
 
 export const isCustomerGuard = () => {
   const localStorage = inject(LocalStorageService);
+  debugger;
 
   const user = localStorage.getItem('user') as User;
   if (user) {

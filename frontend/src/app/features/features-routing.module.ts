@@ -6,6 +6,8 @@ import { CustomerDashboardComponent } from './customer/pages/customer-dashboard/
 import { AdminDashboardComponent } from './admin/pages/admin-dashboard/admin-dashboard.component';
 import { isAdminGuard } from '../core/guards/is-admin.guard';
 import { isCustomerGuard } from '../core/guards/is-customer.guard';
+import { loggedInGuard } from '../core/guards/logged-in.guard';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -18,14 +20,9 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [isAdminGuard],
-    component: AdminDashboardComponent,
-  },
-  {
-    path: 'dashboard',
-    canActivate: [isCustomerGuard],
-    component: CustomerDashboardComponent,
-  },
+    canActivate: [loggedInGuard],
+    component: DashboardComponent,
+  }
 ];
 
 @NgModule({

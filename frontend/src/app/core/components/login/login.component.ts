@@ -20,7 +20,7 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private localStorage: LocalStorageService,
-    private router: Router,
+    private router: Router
   ) {}
 
   submitForm() {
@@ -38,7 +38,8 @@ export class LoginComponent {
           next: (user) => {
             if (user) {
               this.localStorage.setItem('user', user);
-              this.router.navigate(["dashboard"])
+              debugger
+              this.router.navigate(['in', 'dashboard']);
             } else {
               this.incorrectLogin = true;
               console.log('User Not Found');

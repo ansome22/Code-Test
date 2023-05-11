@@ -1,4 +1,4 @@
-import { Cart, CartProducts } from 'src/app/shared/models/cart';
+import { Cart, CartCheckedOut, CartProducts } from 'src/app/shared/models/cart';
 
 export const CartsMock: Cart[] = [
   {
@@ -12,6 +12,16 @@ export const CartsMock: Cart[] = [
     user_id: 3,
     last_name: 'Door',
     email: 'aaa',
+  },
+];
+
+export const CartCheckedOutMock: CartCheckedOut[] = [
+  {
+    first_name: 'Bill',
+    user_id: 4,
+    last_name: 'Pepper',
+    email: 'aaa',
+    datechecked: new Date('2023-05-11T13:24:00'),
   },
 ];
 

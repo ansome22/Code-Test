@@ -18,7 +18,7 @@ export class ListProductsComponent {
     private authService: AuthService
   ) {
     this.isAdmin = this.isCustomer = false;
-    const userType = this.authService.getUserType();
+    const userType = this.authService.UserType;
 
     if (userType == UserType.Admin) {
       this.isAdmin = true;

@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
-import { CartProductsMock, CartsMock } from './mock/cart.mock';
+import {
+  CartCheckedOutMock,
+  CartProductsMock,
+  CartsMock,
+} from './mock/cart.mock';
 import { of } from 'rxjs';
 import { ProductService } from './product.service';
-import { CartProducts, CartProductsFront } from '../../models/cart';
+import {
+  Cart,
+  CartCheckedOut,
+  CartProducts,
+  CartProductsFront,
+} from '../../models/cart';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -10,6 +19,7 @@ import { UserService } from './user.service';
 })
 export class CartService {
   carts = CartsMock;
+  cartcheckedOuts = CartCheckedOutMock;
   cartProducts = CartProductsMock;
   constructor(
     private productsService: ProductService,
@@ -135,6 +145,58 @@ export class CartService {
       }
     } else {
       throw 'User Not Found';
+    }
+  }
+
+  checkOutCart(usersub: any, requestCart: Cart) {
+    //findUser
+    // should be Code Flow but there is no backend
+
+    const user = this.userService.users.find((user) => {
+      if (user.sub == usersub) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    //check user did exist
+    if (user) {
+      //find the cart
+      const cart = this.carts.find((cart) => {
+        if (cart.user_id == user.user_id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (cart) {
+        //save cart to checked out "Table"
+        const cartCheckout: CartCheckedOut = {
+          user_id: cart.user_id,
+          first_name: requestCart.first_name,
+          last_name: requestCart.last_name,
+          email: requestCart.email,
+          datechecked: new Date(),
+        };
+        this.cartcheckedOuts.push(cartCheckout);
+
+        //remove cart
+        this.carts = this.carts.filter((cart) => {
+          if (cartCheckout.user_id != cart.user_id) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        return of(true);
+      } else {
+        throw 'Could not find cart';
+      }
+    } else {
+      throw 'Could not find user';
     }
   }
 }

@@ -16,3 +16,7 @@ export interface CartProducts {
 export interface CartProductsFront extends Cart {
   products?: Product[];
 }
+
+export interface CartCheckedOut extends Cart {
+  datechecked: Date
+}

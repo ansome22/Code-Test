@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/data/user.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
@@ -19,6 +20,7 @@ export class LoginComponent {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private localStorage: LocalStorageService,
     private router: Router
   ) {}
@@ -37,7 +39,7 @@ export class LoginComponent {
         .subscribe({
           next: (user) => {
             if (user) {
-              this.localStorage.setItem('user', user);
+              this.authService.login(user);
               this.router.navigate(['in', 'dashboard']);
             } else {
               this.incorrectLogin = true;

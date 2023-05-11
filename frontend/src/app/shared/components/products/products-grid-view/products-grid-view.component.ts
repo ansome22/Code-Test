@@ -24,7 +24,7 @@ export class ProductsGridViewComponent {
   }
 
   addToCart(productID: number) {
-    const userSub = this.authService.getUserSub();
+    const userSub = this.authService.UserSub;
     this.cartService.addProductToCart(userSub, productID).subscribe({
       next: (added) => {
         if (added && this.products) {

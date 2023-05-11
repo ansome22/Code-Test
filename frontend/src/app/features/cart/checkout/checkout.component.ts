@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { CartProductsFront } from 'src/app/shared/models/cart';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Cart, CartProductsFront } from 'src/app/shared/models/cart';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CartService } from 'src/app/shared/services/data/cart.service';
 
@@ -9,14 +11,27 @@ import { CartService } from 'src/app/shared/services/data/cart.service';
 })
 export class CheckoutComponent {
   cart?: CartProductsFront;
+  formGroup: FormGroup = new FormGroup({
+    firstName: new FormControl(null, [Validators.required]),
+    lastName: new FormControl(null, [Validators.required]),
+    email: new FormControl(null, [Validators.required]),
+  });
   constructor(
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
-    const id = this.authService.getUserId();
-    if (id) {
-      this.getCart(id);
-    }
+    this.authService.user$.subscribe((user) => {
+      this.cart = undefined;
+      if (user) {
+        this.formGroup.patchValue({
+          firstName: user.first_name,
+          lastName: user.last_name,
+          email: user.email,
+        });
+        this.getCart(user.user_id);
+      }
+    });
   }
 
   getCart(id: number) {
@@ -28,5 +43,37 @@ export class CheckoutComponent {
         console.log(error);
       },
     });
+  }
+
+  checkOut() {
+    if (this.formGroup.valid) {
+      const cart = this.formToCart()
+      this.cartService.checkOutCart(this.authService.UserSub,cart).subscribe({
+        next: (result) => {
+          //was successful
+          if (result) {
+            console.log('Checked out...');
+            this.router.navigate(['in', 'dashboard']);
+          } else {
+            console.log('Issue checking out');
+          }
+        },
+        error(err) {
+          console.log(err);
+        },
+      });
+    } else {
+      console.log('Not valid');
+    }
+  }
+
+  formToCart() {
+    const cart: Cart = {
+      user_id: this.authService.UserId,
+      first_name: this.formGroup.controls['firstName'].value,
+      last_name: this.formGroup.controls['lastName'].value,
+      email: this.formGroup.controls['email'].value,
+    };
+    return cart
   }
 }

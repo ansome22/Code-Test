@@ -13,8 +13,8 @@ export class DashboardComponent {
 
   constructor(private authService: AuthService) {
     this.isAdmin = this.isCustomer = false;
-    const userType = this.authService.getUserType();
-    this.userFname = this.authService.getFname();
+    const userType = this.authService.UserType;
+    this.userFname = this.authService.Fname;
 
     if (userType == UserType.Admin) {
       this.isAdmin = true;

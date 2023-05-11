@@ -23,6 +23,10 @@ export class ProductsGridViewComponent {
     this.router.navigate(['in', 'products', 'show', sku]);
   }
 
+  goBack() {
+    this.router.navigate(['in', 'dashboard']);
+  }
+
   addToCart(productID: number) {
     const userSub = this.authService.UserSub;
     this.cartService.addProductToCart(userSub, productID).subscribe({

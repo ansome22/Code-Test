@@ -17,6 +17,10 @@ export class ProductsListViewComponent {
     this.router.navigate(['in', 'products', 'show', sku]);
   }
 
+  goBack() {
+    this.router.navigate(['in', 'dashboard']);
+  }
+
   editProduct(sku: string) {
     this.router.navigate(['in', 'products', 'edit', sku]);
   }

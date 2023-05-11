@@ -25,5 +25,5 @@ urlpatterns = router.urls
 
 urlpatterns += [
     path('admin/', admin.site.urls),
-    path('customer/', core_views.CustomerAPIView.as_view()),
+    path('version/', core_views.VersionAPIView.as_view()),
 ]

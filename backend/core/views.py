@@ -1,11 +1,21 @@
 from json import JSONDecodeError
+import json
 from django.http import JsonResponse
 from .serializers import ChargePointConnectorSerializer, ChargePointSerializer, ChargeSessionSerializer, CustomerSerializer, RFIDSerializer, VehicleSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import views, status
 from rest_framework.response import Response
 
+class VersionAPIView(views.APIView):
+    def get(self, request):
+        """
+        Read File of version
+        """
 
+        f = open('media/data.txt', 'r')
+        data = json.load(f)
+        f.close()
+        return Response(data)
 
 class CustomerAPIView(views.APIView):
     """

@@ -7,7 +7,9 @@
 
 ### Run Locally
 using pythons venv is recomended
-# windows machine
+python -m venv venv
+
+# Windows machine
 venv\Scripts\activate.bat
 
 # mac/linux

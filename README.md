@@ -1,10 +1,12 @@
-# Code Challenge Front end back end
+# Code Challenge Front-end and back-end
 
 ## Introduction
 
-## Setup
+Repo contain my implementation of the code test I was given
 
-### Run Locally
+# Setup
+
+## Run backend Locally
 
 using pythons venv is recomended
 python -m venv venv
@@ -13,15 +15,22 @@ OR
 
 Docker
 
-# Windows machine
+#### venv Windows machine
 
-venv\Scripts\activate.bat
+ - venv\Scripts\activate.bat
+ - pip install -r backend/requirements.txt
 
-# mac/linux
+#### venv mac/linux
 
 source venv/bin/activate
+pip install -r backend/requirements.txt
 
-# Users
+
+## Run front End
+ - cd frontend
+ - npm start
+
+# Users (Front and Back)
 
     username: 'mrich',
     password: 'Password.1',

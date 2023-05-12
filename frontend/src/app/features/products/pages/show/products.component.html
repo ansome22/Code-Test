@@ -1,16 +1,31 @@
 <div *ngIf="product">
-  <button
-    (click)="editProduct(product.sku)"
-    class="bg-slate-700 pl-10 pr-10 mt-5"
-  >
-    Edit Product
-  </button>
+  <div class="grid grid-cols-2">
+    <button
+      class="bg-cyan-700 pt-2 pb-2 pl-5 pr-10 mt-2 ml-2 mr-80"
+      (click)="goBack()"
+    >
+      Go Back
+    </button>
+    <button
+      *ngIf="isAdmin"
+      (click)="editProduct(product.sku)"
+      class="bg-cyan-700 pl-10 pr-10 mt-2 ml-2 mr-60"
+    >
+      Edit Product
+    </button>
+  </div>
+
+  <h1>Product Name:</h1>
   <p>{{ product.name }}</p>
+  <h1>Product Description:</h1>
   <p>{{ product.description }}</p>
+  <h1>Product Price:</h1>
   <p>$ {{ product.price }}</p>
 
-  <div>
-    <button>Add to Cart</button>
+  <div *ngIf="isCustomer">
+    <button class="bg-cyan-700 pt-2 pb-2 pl-10 pr-10 mt-4 ml-2 mb-2">
+      Add to Cart
+    </button>
   </div>
 </div>
 

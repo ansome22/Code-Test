@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartProductsFront } from 'src/app/shared/models/cart';
 
 @Component({
@@ -10,4 +11,10 @@ import { CartProductsFront } from 'src/app/shared/models/cart';
 export class ShowCartComponent {
   @Input()
   cart?: CartProductsFront;
+
+  constructor(private router: Router){}
+
+  goBack() {
+    this.router.navigate(['in', 'dashboard']);
+  }
 }

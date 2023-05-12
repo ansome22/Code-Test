@@ -31,4 +31,8 @@ export class ListAllCartsComponent {
       return 0;
     }
   }
+
+  goBack() {
+    this.router.navigate(['in', 'dashboard']);
+  }
 }

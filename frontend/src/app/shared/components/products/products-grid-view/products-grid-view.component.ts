@@ -13,6 +13,8 @@ import { CartService } from 'src/app/shared/services/data/cart.service';
 export class ProductsGridViewComponent {
   @Input()
   products?: Product[];
+  @Input()
+  backButton: boolean = false;
   constructor(
     private router: Router,
     private cartService: CartService,

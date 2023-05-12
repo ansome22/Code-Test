@@ -1,15 +1,33 @@
-<h1>Products: </h1>
-<button (click)="goBack()">Go Back</button>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-  <div *ngFor="let product of products" class="grid">
-    <div (click)="showProduct(product.sku)" class="cursor-pointer">
-      <p><b>Name:</b> {{ product.name }}</p>
-      <p class="line-clamp-1"><b>Description:</b> {{ product.description }}</p>
-      <p><b>Price:</b> $ {{ product.price }}</p>
-    </div>
-    <div class="p-5">
-      <button (click)="addToCart(product.id)">Add to Cart</button>
-      <button disabled="true">Added to cart</button>
+<h1>Products:</h1>
+<button
+  class="bg-cyan-700 pt-2 pb-2 pl-5 pr-10 mt-2 ml-2 mb-2"
+  *ngIf="backButton"
+  (click)="goBack()"
+>
+  Go Back
+</button>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div *ngFor="let product of products">
+    <div class="drop-shadow-xl text-center grid">
+      <div
+        (click)="showProduct(product.sku)"
+        class="cursor-pointer border-solid border-2 border-sky-500"
+      >
+        <p><b>Name:</b> {{ product.name }}</p>
+        <p class="line-clamp-1">
+          <b>Description:</b> {{ product.description }}
+        </p>
+        <p><b>Price:</b> $ {{ product.price }}</p>
+      </div>
+      <div class="p-2 justify-self-center">
+        <button
+          class="bg-cyan-700 pt-2 pb-2 pl-5 pr-3 mt-2 ml-2 mb-2"
+          (click)="addToCart(product.id)"
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   </div>
 </div>

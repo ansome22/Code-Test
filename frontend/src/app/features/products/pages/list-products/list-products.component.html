@@ -1,2 +1,10 @@
-<app-products-list-view *ngIf="isAdmin" [products]="products"></app-products-list-view>
-<app-products-grid-view *ngIf="isCustomer" [products]="products"></app-products-grid-view>
+<app-products-list-view
+  *ngIf="isAdmin"
+  [backButton]="true"
+  [products]="products"
+></app-products-list-view>
+<app-products-grid-view
+  *ngIf="isCustomer"
+  [backButton]="true"
+  [products]="products"
+></app-products-grid-view>

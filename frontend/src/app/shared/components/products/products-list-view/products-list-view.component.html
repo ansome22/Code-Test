@@ -1,10 +1,16 @@
-<h1>Products: </h1>
-<button (click)="goBack()">Go Back</button>
+<h1>Products:</h1>
+<button
+  *ngIf="backButton"
+  class="bg-cyan-700 pt-2 pb-2 pl-10 pr-10 mt-2 ml-2"
+  (click)="goBack()"
+>
+  Go Back
+</button>
 <div *ngFor="let product of products">
-  <div class="grid gap-4 grid-cols-2 p-10">
+  <div class="grid m-10 grid-cols-2 p-2 border-solid border-2 border-sky-500">
     <div>
       <div
-        class="grid gap-4 grid-cols-2 cursor-pointer border-solid border-2 border-sky-500"
+        class="grid gap-4 grid-cols-2 cursor-pointer"
         (click)="showProduct(product.sku)"
       >
         <div>
@@ -12,13 +18,18 @@
           <p class="line-clamp-1">{{ product.description }}</p>
         </div>
         <div>
-          <p class="text-center">$ {{ product.price }}</p>
+          <p class="text-center mt-2">$ {{ product.price }}</p>
         </div>
       </div>
     </div>
     <div class="grid justify-center">
-      <button (click)="editProduct(product.sku)">Edit Product</button>
-      <button>Add to Cart</button>
+      <button
+        class="bg-cyan-700 pl-10 pr-10 mt-1"
+        *ngIf="isAdmin"
+        (click)="editProduct(product.sku)"
+      >
+        Edit Product
+      </button>
     </div>
   </div>
 </div>

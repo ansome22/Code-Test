@@ -1,9 +1,15 @@
 <h1>Customers Carts:</h1>
+<button
+  class="bg-cyan-700 pt-2 pb-2 pl-5 pr-10 mt-2 ml-2 mr-80"
+  (click)="goBack()"
+>
+  Go Back
+</button>
 <div *ngFor="let cart of carts">
-  <div class="grid grid-cols-2 p-4">
+  <div class="grid m-10 grid-cols-2 p-2 border-solid border-2 border-sky-500">
     <div>
       <div
-        class="grid gap-4 grid-cols-2 cursor-pointer border-solid border-2 border-sky-500"
+        class="grid gap-4 grid-cols-2 cursor-pointer"
         (click)="showCart(cart.user_id)"
       >
         <div>
@@ -11,7 +17,7 @@
           <p><b>Last Name:</b> {{ cart.last_name }}</p>
         </div>
         <div>
-          <p class="text-center">
+          <p class="text-center mt-2">
             <b>Number of items:</b> {{ amountofProducts(cart.products) }}
           </p>
         </div>

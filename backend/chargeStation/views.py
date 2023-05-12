@@ -19,7 +19,7 @@ class ChargeSessionViewSet(
         viewsets.GenericViewSet
         ):
     """
-    A simple ViewSet for listing or retrieving items.
+    A simple ViewSet for listing or retrieving Charge Session.
     """
     permission_classes = (IsAuthenticated,)
     queryset = ChargeSession.objects.all()
@@ -71,7 +71,7 @@ class ConnectorViewSet(
         viewsets.GenericViewSet
         ):
     """
-    A simple ViewSet for listing, retrieving and creating orders.
+    A simple ViewSet for listing, retrieving and creating Charge Session Connector.
     """
     permission_classes = (IsAuthenticated,)
     serializer_class = ChargePointConnectorSerializer

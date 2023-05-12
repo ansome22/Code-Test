@@ -18,12 +18,17 @@ from django.urls import path
 from django.contrib import admin
 from core import views as core_views
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
+from chargeStation import views as chargeStation_views
 
 router = routers.DefaultRouter()
+router.register(r'chargesession', chargeStation_views.ChargeSessionViewSet, basename='charge Session API')
+router.register(r'connector', chargeStation_views.ConnectorViewSet, basename='Connector API')
 
 urlpatterns = router.urls
 
 urlpatterns += [
     path('admin/', admin.site.urls),
     path('version/', core_views.VersionAPIView.as_view()),
+    path('api-token-auth/', obtain_auth_token),
 ]

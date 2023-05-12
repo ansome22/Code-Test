@@ -18,14 +18,7 @@ test('test', async ({ page }, testInfo) => {
   });
   await page.getByRole('button', { name: 'Login' }).click();
   await page.getByRole('button', { name: 'View products' }).click();
-  await page
-    .locator('div')
-    .filter({
-      hasText:
-        /^Name: LampDescription: aaaPrice: \$ 20Add to CartAdded to cart$/,
-    })
-    .getByRole('button', { name: 'Add to Cart' })
-    .click();
+  await page.locator('button[name="La1addbutton"]').click();
   screenshot = await page.screenshot();
   testInfo.attach('Product List', {
     body: screenshot,
@@ -33,7 +26,7 @@ test('test', async ({ page }, testInfo) => {
   });
   await page.getByRole('button', { name: 'Go Back' }).click();
   await page.getByRole('button', { name: 'Go to checkout' }).click();
-  await page.getByText('Lamp').click();
+  await page.getByRole('heading', { name: 'Checkout:' }).click();
   screenshot = await page.screenshot();
   testInfo.attach('CheckOut', {
     body: screenshot,

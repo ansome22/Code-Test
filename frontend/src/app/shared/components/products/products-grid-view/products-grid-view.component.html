@@ -22,6 +22,7 @@
       </div>
       <div class="p-2 justify-self-center">
         <button
+          [name]="product.sku + 'addbutton'"
           class="bg-cyan-700 pt-2 pb-2 pl-5 pr-3 mt-2 ml-2 mb-2"
           (click)="addToCart(product.id)"
         >
